@@ -5,6 +5,7 @@ const timeEl = document.querySelector('#time');
 const board = document.querySelector('#board');
 const colors = ['#6BE400', '#E2FA00', '#8805A8', '#E20048'];
 
+let timerId;
 let time = 0;
 let score = 0;
 
@@ -30,7 +31,7 @@ board.addEventListener('click', e => {
 })
 
 function startGame() {
-    setInterval(decreaseTime, 1000);
+    timerId = setInterval(decreaseTime, 1000);
     createRandomCircle();
     setTime(time);
 }
@@ -55,6 +56,7 @@ function setTime(value) {
 function finishGame() {
     timeEl.parentNode.classList.add('hide');
     board.innerHTML = `<h1>Ваш счёт: <span class="primary">${score}</span></h1>`
+    clearInterval(timerId)
 }
 
 function createRandomCircle() {
